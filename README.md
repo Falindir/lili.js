@@ -1,1 +1,1 @@
-# lili.js - Lib javascipt for deb
+# lili.js - Lib javascript for deb
