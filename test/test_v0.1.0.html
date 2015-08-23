@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LILI</title>
+
+    <script src="../src/lili.js"></script>
+
+</head>
+<body>
+    <h1> TEST LILI v0.1.0 </h1>
+</body>
+
+<script type="text/javascript">
+    (function() {
+        console.log('Test LILI.js');
+
+        var A = LILI.Class.extend({
+
+            init : function(value) {
+               this.value = value;
+               var valuePrivate = this.value + " - Private";
+
+               this.getVP = function() {
+                  return valuePrivate;
+               };
+
+               this.setVP = function(value) {
+                  valuePrivate = value;
+               };
+            },
+
+            sayHello : function() {
+                console.log("I'm in Class A");
+            }
+        });
+
+        var B = new A("var test");
+
+        B.sayHello(); // I'm in Class A
+        console.log(B.value); // var test
+        console.log(B.valuePrivate) // undefined
+        console.log(B.getVP()); // var test - Private
+        B.value = "new value";
+        console.log(B.value); // new value
+        console.log(B.getVP()); // var test - Private
+        B.setVP("new private value");
+        console.log(B.getVP()); // new private value
+
+        var C = A.extend({
+
+            init : function(value) {
+                this._super(value);
+            },
+
+            sayHello : function() {
+                this._super(); // send the function A.sayHello()
+                console.log("I'm in Class C");
+            }
+
+        })
+
+        var D = new C("test C");
+
+        D.sayHello(); // I'm in Class A \n I'm in Class C
+        console.log(D.value); // test C
+        console.log(D.getVP()); // test C - Private
+
+    })();
+</script>
+
+</body>
+</html>
