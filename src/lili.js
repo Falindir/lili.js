@@ -82,6 +82,105 @@
       return Class;
     };
 
+    LILI.Collections = {
+
+        /** repository of Collections with LIXI"**/
+
+    };
+
+    LILI.Collections.List = LILI.Class.extend({
+
+        init : function() {
+           this.collections = [];
+           this.size = 0;
+        },
+
+        clear : function () {
+            this.collections = [];
+            this.size = 0;
+        },
+
+        add : function (value) {
+            this.collections.push(value);
+            this.size += 1;
+        },
+
+        get : function (index) {
+            return this.collections[index];
+        },
+
+        last : function () {
+            if(this.collections.length === 0)
+              return undefined;
+            else
+              return this.collections[this.collections.length - 1];
+        },
+
+        set : function (index, value) {
+            this.collections[index] = value;
+        },
+
+        remove : function (index) {
+            this.collections.splice(index, 1);
+            if(this.size > 0)
+                this.size -= 1;
+        },
+
+        contains : function (value) {
+            for (i = 0; i < this.collections.length; i++)
+                if(this.collections[i] === value)
+                    return true;
+
+            return false;
+        },
+
+        getFirstIndex : function (value) {
+            for (i = 0; i < this.collections.length; i++)
+                if(this.collections[i] === value)
+                    return i;
+
+            return undefined;
+        },
+
+        getAllIndex : function (value) {
+            var index = new LILI.Collections.List();
+
+            for (i = 0; i < this.collections.length; i++)
+                if(this.collections[i] === value)
+                    index.add(i);
+
+            return index;
+
+        },
+
+        getLastIndex : function (value) {
+            var listVal = this.getAllIndex(value);
+
+            if(listVal.size === 0)
+                return undefined;
+
+            return listVal.last();
+        },
+
+        getInterval : function (start, end) {
+            var interval = new LILI.Collections.List();
+
+            for (i = start; i <= end; i++) {
+                interval.add(this.get(i));
+            }
+
+            return interval;
+        },
+
+        addTab : function (tab, reset) {
+            if(reset)
+                this.clear();
+
+            for(var i = 0; i < tab.length; i++)
+                this.add(tab[i]);
+        }
+    });
+
     LILI.sayHello();
 
     window.LILI = LILI;

@@ -13,3 +13,8 @@
   * Possibility of super in constructor
   * Attribute public and private
   * Private attribut is initialized for subClass, so accessible by get/set
+
+
+## v0.1.1
+
+  * Add LIXI.Collections.List
